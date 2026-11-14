@@ -29,15 +29,18 @@
       (async () => {
         if (!('serviceWorker' in navigator)) return;
         const registrations = await navigator.serviceWorker.getRegistrations();
-        const hadLegacyWorker = registrations.length > 0;
-        await Promise.all(registrations.map((registration) => registration.unregister()));
+        const legacyRegistrations = registrations.filter((registration) => {
+          const workers = [registration.active, registration.waiting, registration.installing];
+          return workers.some((worker) => worker?.scriptURL.endsWith('/sw.js'));
+        });
+        const hadLegacyWorker = legacyRegistrations.length > 0;
+        await Promise.all(legacyRegistrations.map((registration) => registration.unregister()));
         if (hadLegacyWorker && !sessionStorage.getItem('study-sw-reset-v2')) {
           sessionStorage.setItem('study-sw-reset-v2', '1');
           await Promise.all((await caches.keys()).map((key) => caches.delete(key)));
           location.reload();
-        } else {
-          sessionStorage.removeItem('study-sw-reset-v2');
         }
+        if (!hadLegacyWorker) sessionStorage.removeItem('study-sw-reset-v2');
       })();
     </script>
     <script type="module" crossorigin src="assets/index-DZOE5dXb.js"></script>
