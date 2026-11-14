@@ -25,6 +25,21 @@
     <link rel="icon" href="icon.svg" />
     <link rel="apple-touch-icon" href="icon-192.png" />
     <title>أدوات الدراسة — كل أدواتك الدراسية في مكان واحد</title>
+    <script>
+      (async () => {
+        if (!('serviceWorker' in navigator)) return;
+        const registrations = await navigator.serviceWorker.getRegistrations();
+        const hadLegacyWorker = registrations.length > 0;
+        await Promise.all(registrations.map((registration) => registration.unregister()));
+        if (hadLegacyWorker && !sessionStorage.getItem('study-sw-reset-v2')) {
+          sessionStorage.setItem('study-sw-reset-v2', '1');
+          await Promise.all((await caches.keys()).map((key) => caches.delete(key)));
+          location.reload();
+        } else {
+          sessionStorage.removeItem('study-sw-reset-v2');
+        }
+      })();
+    </script>
     <script type="module" crossorigin src="assets/index-DZOE5dXb.js"></script>
     <link rel="modulepreload" crossorigin href="assets/react-vendor-DLJbg3Ql.js">
     <link rel="stylesheet" crossorigin href="assets/index-n61s-9Pc.css">
