@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#215eea" />
+    <meta name="description" content="تعرف على طريقة معالجة ملفاتك وبياناتك محليًا داخل متصفحك في منصة أدوات الدراسة." />
+    <meta name="keywords" content="أدوات الدراسة, أدوات PDF مجانية, مؤقت مذاكرة, جدول دراسي, حاسبة علمية" />
+    <link rel="canonical" href="https://studytools.maaoun.com/privacy" />
+    <meta property="og:site_name" content="أدوات الدراسة" />
+    <meta property="og:locale" content="ar_SA" />
+    <meta property="og:title" content="الخصوصية | أدوات الدراسة" />
+    <meta property="og:description" content="تعرف على طريقة معالجة ملفاتك وبياناتك محليًا داخل متصفحك في منصة أدوات الدراسة." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://studytools.maaoun.com/privacy" />
+    <meta property="og:image" content="https://studytools.maaoun.com/icon.svg" />
+    <meta property="og:image:alt" content="شعار أدوات الدراسة" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="الخصوصية | أدوات الدراسة" />
+    <meta name="twitter:description" content="تعرف على طريقة معالجة ملفاتك وبياناتك محليًا داخل متصفحك في منصة أدوات الدراسة." />
+    <meta name="twitter:image" content="https://studytools.maaoun.com/icon.svg" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <title>الخصوصية | أدوات الدراسة</title>
+    <script type="application/ld+json">[{"@context":"https://schema.org","@type":"WebSite","name":"أدوات الدراسة","alternateName":"Study Tools","url":"https://studytools.maaoun.com/","inLanguage":"ar"},{"@context":"https://schema.org","@type":"SoftwareApplication","name":"الخصوصية | أدوات الدراسة","description":"تعرف على طريقة معالجة ملفاتك وبياناتك محليًا داخل متصفحك في منصة أدوات الدراسة.","url":"https://studytools.maaoun.com/privacy","applicationCategory":"EducationalApplication","operatingSystem":"Web Browser","offers":{"@type":"Offer","price":"0","priceCurrency":"SAR"},"inLanguage":"ar"}]</script>
+    <link rel="icon" href="/icon.svg" />
+    <link rel="apple-touch-icon" href="/icon-192.png" />
+    <script>
+      (async () => {
+        if (!('serviceWorker' in navigator)) return;
+        const registrations = await navigator.serviceWorker.getRegistrations();
+        const legacyRegistrations = registrations.filter((registration) => {
+          const workers = [registration.active, registration.waiting, registration.installing];
+          return workers.some((worker) => worker?.scriptURL.endsWith('/sw.js'));
+        });
+        const hadLegacyWorker = legacyRegistrations.length > 0;
+        await Promise.all(legacyRegistrations.map((registration) => registration.unregister()));
+        if (hadLegacyWorker && !sessionStorage.getItem('study-sw-reset-v2')) {
+          sessionStorage.setItem('study-sw-reset-v2', '1');
+          await Promise.all((await caches.keys()).map((key) => caches.delete(key)));
+          location.reload();
+        }
+        if (!hadLegacyWorker) sessionStorage.removeItem('study-sw-reset-v2');
+      })();
+    </script>
+    <script type="module" crossorigin src="assets/index-DZOE5dXb.js"></script>
+    <link rel="modulepreload" crossorigin href="assets/react-vendor-DLJbg3Ql.js">
+    <link rel="stylesheet" crossorigin href="assets/index-n61s-9Pc.css">
+    <link rel="manifest" href="manifest.webmanifest">
+  </head>
+  <body>
+    <div id="root"><main class="seo-fallback" lang="ar" dir="rtl">
+      <h1>الخصوصية</h1>
+      <p>تعرف على طريقة معالجة ملفاتك وبياناتك محليًا داخل متصفحك في منصة أدوات الدراسة.</p>
+      <h2>أدوات الدراسة المجانية</h2>
+      <ul><li><a href="/pomodoro">مؤقت المذاكرة المجاني | أدوات الدراسة</a></li>
+<li><a href="/exam-countdown">عداد الاختبارات والمواعيد | أدوات الدراسة</a></li>
+<li><a href="/countdowns">المواسم والإجازات والمناسبات | أدوات الدراسة</a></li>
+<li><a href="/schedule">مصمم الجدول الدراسي المجاني | أدوات الدراسة</a></li>
+<li><a href="/calculator">الحاسبة العلمية المجانية | أدوات الدراسة</a></li></ul>
+    </main></div>
+  </body>
+</html>
