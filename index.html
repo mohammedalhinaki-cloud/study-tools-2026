@@ -28,19 +28,16 @@
     <script>
       (async () => {
         if (!('serviceWorker' in navigator)) return;
+        const resetKey = 'study-sw-reset-v3';
         const registrations = await navigator.serviceWorker.getRegistrations();
-        const legacyRegistrations = registrations.filter((registration) => {
-          const workers = [registration.active, registration.waiting, registration.installing];
-          return workers.some((worker) => worker?.scriptURL.endsWith('/sw.js'));
-        });
-        const hadLegacyWorker = legacyRegistrations.length > 0;
-        await Promise.all(legacyRegistrations.map((registration) => registration.unregister()));
-        if (hadLegacyWorker && !sessionStorage.getItem('study-sw-reset-v2')) {
-          sessionStorage.setItem('study-sw-reset-v2', '1');
-          await Promise.all((await caches.keys()).map((key) => caches.delete(key)));
+        const hadRegistrations = registrations.length > 0;
+        await Promise.all(registrations.map((registration) => registration.unregister()));
+        const cacheKeys = await caches.keys();
+        await Promise.all(cacheKeys.map((key) => caches.delete(key)));
+        if ((hadRegistrations || cacheKeys.length > 0) && !sessionStorage.getItem(resetKey)) {
+          sessionStorage.setItem(resetKey, '1');
           location.reload();
         }
-        if (!hadLegacyWorker) sessionStorage.removeItem('study-sw-reset-v2');
       })();
     </script>
     <script type="module" crossorigin src="assets/index-DZOE5dXb.js?v=c2a591a"></script>
