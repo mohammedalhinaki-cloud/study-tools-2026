@@ -1,3 +1,5 @@
+const STUDY_RELEASE = '2026-11-16-1429';
+
 self.addEventListener('install', () => self.skipWaiting());
 self.addEventListener('activate', event => {
   event.waitUntil((async () => {
