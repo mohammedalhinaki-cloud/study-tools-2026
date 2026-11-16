@@ -30,16 +30,14 @@
     <script>
       (async () => {
         if (!('serviceWorker' in navigator)) return;
-        const resetKey = 'study-sw-reset-v3';
+        const resetKey = 'study-sw-reset-v3-done';
+        if (localStorage.getItem(resetKey) === '1') return;
+        localStorage.setItem(resetKey, '1');
         const registrations = await navigator.serviceWorker.getRegistrations();
-        const hadRegistrations = registrations.length > 0;
         await Promise.all(registrations.map((registration) => registration.unregister()));
         const cacheKeys = await caches.keys();
         await Promise.all(cacheKeys.map((key) => caches.delete(key)));
-        if ((hadRegistrations || cacheKeys.length > 0) && !sessionStorage.getItem(resetKey)) {
-          sessionStorage.setItem(resetKey, '1');
-          location.reload();
-        }
+        if (registrations.length > 0 || cacheKeys.length > 0) location.reload();
       })();
     </script>
     <script type="module" crossorigin src="assets/index-DZOE5dXb.js?v=c2a591a"></script>
